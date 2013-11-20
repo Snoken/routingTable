@@ -8,13 +8,12 @@ bool testIpAddress()
 {
 	try
 	{
-		IpAddress addr("255.255.255.255");
+		IpAddress addr("1.2.3.4");
 		cout << addr << endl;
-		cout << addr.getBinaryString() << endl;
 		addr.applyMask(16);
 		cout << addr << endl;
 	}
-	catch (exception &e)
+	catch (runtime_error &e)
 	{
 		cout << e.what() << endl;
 		return false;
@@ -29,7 +28,7 @@ bool testIpRange()
 		IpRange range("128.153.64.0/18", 1);
 		cout << range << endl;
 	}
-	catch (exception &e)
+	catch (runtime_error &e)
 	{
 		cout << e.what() << endl;
 		return false;
@@ -62,7 +61,7 @@ int main(int argc, const char* argv [])
 		ForwardingTable table2(argv[2]);
 		cout << table1 << endl << table2 << endl;
 	}
-	catch (exception &e)
+	catch (runtime_error &e)
 	{
 		cout << e.what() << endl;
 	}

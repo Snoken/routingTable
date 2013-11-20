@@ -24,8 +24,17 @@ ForwardingTable::ForwardingTable(const char* infile)
 		}
 		try
 		{
-			IpRange rule(line.substr(0, loc), atoi(line.substr(loc + 1).c_str()));
-			m_rules.push_back(rule);
+			int nextHop = atoi(line.substr(loc + 1).c_str());
+			map<int, list<IpRange>>::iterator mapLoc = m_rules.find(nextHop);
+			if(mapLoc != m_rules.end())
+				mapLoc->second.push_back(IpRange(line.substr(0, loc), nextHop));
+			else
+			{
+				list<IpRange> newList;
+				newList.push_back(IpRange(line.substr(0, loc), nextHop));
+				m_rules.insert(make_pair(nextHop, newList));
+			}
+			
 		}
 		catch (runtime_error &e)
 		{
@@ -33,28 +42,23 @@ ForwardingTable::ForwardingTable(const char* infile)
 		}
 		++lineNum;
 	}
-	m_rules.sort();
-	//cout << *this << endl;
-	//IpRange prev = *m_rules.begin();
-	//list<IpRange>::iterator itr = ++(m_rules.begin());
-	////doesn't work, maybe go through all with same next hop and find lowest of all that overlap
-	//while (itr != m_rules.end())
-	//{
-	//	if (prev.combineRanges(*itr))
-	//	{
-	//		prev = *itr;
-	//		m_rules.erase(itr++);
-	//		continue;
-	//	}
-	//	if (itr != m_rules.end())
-	//		prev = *itr++;
-	//}
+	for(map<int, list<IpRange>>::iterator itr = m_rules.begin(); itr != m_rules.begin(); ++itr)
+		itr->second.sort();
+	cout << *this << endl;
+}
+
+void ForwardingTable::compare(ForwardingTable f){
+	/*compare two*/
+
 }
 
 ostream& operator<<(ostream& stream, const ForwardingTable& obj)
 {
 	stream << "Rules:" << endl;
-	for (list<IpRange>::const_iterator itr = obj.m_rules.begin(); itr != obj.m_rules.end(); ++itr)
-		stream << "\t" << *itr << endl;
+	for(map<int, list<IpRange>>::const_iterator mapItr = obj.m_rules.begin(); mapItr != obj.m_rules.end(); ++mapItr)
+	{
+		for (list<IpRange>::const_iterator itr = mapItr->second.begin(); itr != mapItr->second.end(); ++itr)
+			stream << "\t" << *itr << endl;
+	}
 	return stream;
 }

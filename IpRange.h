@@ -1,6 +1,7 @@
 #ifndef IPRANGE_H
 #define IPRANGE_H
 
+#include <cmath>
 #include "IpAddress.h"
 class IpRange
 {
@@ -24,6 +25,8 @@ public:
 	bool operator< (const IpRange &other) const{ return m_start < other.m_start; }
 	bool operator>= (const IpRange &other) const{ return m_start >= other.m_start; }
 	bool operator > (const IpRange &other) const{ return m_start > other.m_start; }
+
+	int *pGetInterface() { return &m_interface; }
 
 private:
 	IpAddress m_start, m_end;

@@ -9,7 +9,7 @@ IpAddress::IpAddress(string addr){
 		streamsize avail = stream.rdbuf()->in_avail();
 		stream >> currOct;
 		if (avail == stream.rdbuf()->in_avail())
-			throw exception("Invalid IP Format");
+			throw runtime_error("Invalid IP Format");
 		currOct <<= 8 * (4-i);
 		m_addr += currOct;
 		stream.get();
@@ -27,15 +27,6 @@ string IpAddress::getString() const
 			addr.append(".");
 	}
 	return addr;
-}
-
-string IpAddress::getBinaryString()
-{
-	/*stringstream stream(bitset<32>(m_addr).to_string<char, char_traits<char>, allocator<char> >());
-	string retVal;
-	stream >> retVal;
-	return retVal;*/
-	return "null";
 }
 
 void IpAddress::applyMask(uint32_t mask) 

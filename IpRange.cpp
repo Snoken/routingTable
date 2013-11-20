@@ -4,7 +4,7 @@ IpRange::IpRange(string range, int interface)
 {
 	size_t loc = range.find("/");
 	if (loc == string::npos)
-		throw exception("Invalid Range Format");
+		throw runtime_error("Invalid Range Format");
 	/*cout << range.substr(0, loc) << endl;
 	cout << range.substr(loc+1) << endl;*/
 	try
@@ -23,7 +23,7 @@ IpRange::IpRange(string range, int interface)
 		m_end.applyMask(mask);
 		m_end = m_end + IpAddress((uint32_t)pow(2.0, (double)32-mask)-1);
 	}
-	catch (exception &e)
+	catch (runtime_error &e)
 	{
 		throw e;
 	}
@@ -33,6 +33,7 @@ IpRange::IpRange(string range, int interface)
 
 bool IpRange::combineRanges(IpRange toCombine)
 {
+	cout << *this << endl << toCombine << endl;
 	//need to combine if overlap and have same next hop
 	if (m_interface != toCombine.m_interface)
 		return false;
@@ -58,6 +59,7 @@ bool IpRange::combineRanges(IpRange toCombine)
 	//if toCombine is completely within current
 	else if (inRange(toCombine.m_start) && inRange(toCombine.m_start))
 		return true;
+
 
 	return false;
 }

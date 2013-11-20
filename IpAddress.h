@@ -18,7 +18,6 @@ public:
 	
 	void setAddress();
 	string getString() const;
-	string getBinaryString();
 	void applyMask(uint32_t mask);
 
 	bool operator==(const IpAddress &other) const{ return m_addr == other.m_addr; }
