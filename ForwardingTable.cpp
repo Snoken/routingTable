@@ -6,7 +6,7 @@ ForwardingTable::ForwardingTable(const char* infile)
 	if (!in)
 	{
 		string error = infile + string(": File not found.");
-		throw exception(error.c_str());
+		throw runtime_error(error.c_str());
 	}
 	int lineNum = 1;
 	while (in.good())
@@ -19,15 +19,15 @@ ForwardingTable::ForwardingTable(const char* infile)
 		if (loc == string::npos)
 		{
 			string error = string("Input format invalid in ") + 
-				infile + string(":") + to_string(lineNum);
-			throw exception(error.c_str());
+				infile + string(":") + std::to_string((long double)lineNum);
+			throw runtime_error(error.c_str());
 		}
 		try
 		{
 			IpRange rule(line.substr(0, loc), atoi(line.substr(loc + 1).c_str()));
 			m_rules.push_back(rule);
 		}
-		catch (exception &e)
+		catch (runtime_error &e)
 		{
 			throw e;
 		}

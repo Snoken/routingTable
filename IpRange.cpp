@@ -21,7 +21,7 @@ IpRange::IpRange(string range, int interface)
 
 		m_end = IpAddress(m_start);
 		m_end.applyMask(mask);
-		m_end = m_end + IpAddress((uint32_t)pow(2, 32-mask)-1);
+		m_end = m_end + IpAddress((uint32_t)pow(2.0, (double)32-mask)-1);
 	}
 	catch (exception &e)
 	{

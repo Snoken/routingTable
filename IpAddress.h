@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <bitset>
+#include <stdexcept>
 
 using namespace std;
 
