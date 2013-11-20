@@ -5,12 +5,19 @@ IpRange::IpRange(string range, int interface)
 	size_t loc = range.find("/");
 	if (loc == string::npos)
 		throw runtime_error("Invalid Range Format");
+	/*cout << range.substr(0, loc) << endl;
+	cout << range.substr(loc+1) << endl;*/
 	try
 	{
 		m_start = IpAddress(range.substr(0, loc));
 		stringstream stream(range.substr(loc + 1));
 		uint32_t mask;
 		stream >> mask;
+
+		/*
+		m_start.applyMask(mask);
+		m_end = IpAddress(pow(2, mask)-1) + m_start;
+		*/
 
 		m_end = IpAddress(m_start);
 		m_end.applyMask(mask);

@@ -13,7 +13,6 @@ public:
 	void compare(ForwardingTable f);
 	friend ostream& operator<<(ostream& stream, const ForwardingTable& obj);
 private:
-	void combineAll();
 	map<int, list<IpRange>> m_rules;
 };
 

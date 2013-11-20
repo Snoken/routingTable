@@ -23,7 +23,7 @@ string IpAddress::getString() const
 	{
 		uint8_t oct = m_addr >> 8 * (4 - i);
 		#ifdef WIN32
-		//This is to clear an error on VS2010, not an issue in VS2012
+		//This is to shut up VS2010, not an issue in VS2012
 		addr.append(to_string((long double)oct));
 		#else
 		addr.append(to_string(oct));
