@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ForwardingTable.cpp" />
+    <ClCompile Include="helpers.h" />
     <ClCompile Include="IpAddress.cpp" />
     <ClCompile Include="IpRange.cpp" />
     <ClCompile Include="main.cpp" />

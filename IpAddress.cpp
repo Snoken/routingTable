@@ -24,9 +24,9 @@ string IpAddress::getString() const
 		uint8_t oct = m_addr >> 8 * (4 - i);
 		#ifdef WIN32
 		//This is to clear an error on VS2010, not an issue in VS2012
-		addr.append(to_string((long double)oct));
+		addr.append(helpers::to_string((long double)oct));
 		#else
-		addr.append(to_string(oct));
+		addr.append(helpers::to_string(oct));
 		#endif
 		if (i != 4)
 			addr.append(".");

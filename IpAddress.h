@@ -6,6 +6,7 @@
 #include <sstream>
 #include <bitset>
 #include <stdexcept>
+#include "helpers.h"
 
 using namespace std;
 

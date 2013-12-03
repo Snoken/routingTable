@@ -3,6 +3,7 @@
 #include <list>
 #include <map>
 #include <fstream>
+#include <stdlib.h>
 #include "IpRange.h"
 
 class ForwardingTable

@@ -19,7 +19,7 @@ ForwardingTable::ForwardingTable(const char* infile)
 		if (loc == string::npos)
 		{
 			string error = string("Input format invalid in ") + 
-				infile + string(":") + std::to_string((long double)lineNum);
+				infile + string(":") + helpers::to_string((long double)lineNum);
 			throw runtime_error(error.c_str());
 		}
 		try
@@ -49,26 +49,26 @@ ForwardingTable::ForwardingTable(const char* infile)
 
 void ForwardingTable::combineAll()
 {
-	//iterate over each next hop value (map keys)
-	for(map<int, list<IpRange>>::iterator mapItr = m_rules.begin(); mapItr != m_rules.begin(); ++itr)
-	{
-		//iterate through list of ranges, advance if combined w/ next
-		for (list<IpRange>::const_iterator itr = mapItr->second.begin(); 
-			itr != mapItr->second.end(); ++itr)
-		{
-			//try to combine with next value
-			++itr;
-			//make sure there is a next value
-			if(itr == mapItr->second.end())
-				break;
-			
-			//fetch next value and set itr back
-			IpRange check = *itr--;
-			bool combined;
-			do { 
-				combined = itr->combineRanges(check);
-		}
-	}
+	////iterate over each next hop value (map keys)
+	//for(map<int, list<IpRange>>::iterator mapItr = m_rules.begin(); mapItr != m_rules.begin(); ++itr)
+	//{
+	//	//iterate through list of ranges, advance if combined w/ next
+	//	for (list<IpRange>::const_iterator itr = mapItr->second.begin(); 
+	//		itr != mapItr->second.end(); ++itr)
+	//	{
+	//		//try to combine with next value
+	//		++itr;
+	//		//make sure there is a next value
+	//		if(itr == mapItr->second.end())
+	//			break;
+	//		
+	//		//fetch next value and set itr back
+	//		IpRange check = *itr--;
+	//		bool combined;
+	//		do { 
+	//			combined = itr->combineRanges(check);
+	//	}
+	//}
 }
 
 void ForwardingTable::compare(ForwardingTable f){
